@@ -1,0 +1,11 @@
+torch
+torchvision
+transformers==4.41.2
+tokenizers==0.19.1
+transformers_stream_generator==0.0.5
+sentencepiece==0.2.0
+accelerate==0.30.1
+mdtex2html==1.3.0
+gradio==4.32.1
+tiktoken==0.7.0
+einops==0.8.0
