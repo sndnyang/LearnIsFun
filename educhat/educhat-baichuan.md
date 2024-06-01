@@ -1,13 +1,7 @@
-# Educhat 学习记录
+# Educhat-baichuan 学习记录
 
-华东师范大学开发了 EduChat https://github.com/ECNU-ICALK/EduChat ， 现在应该也是在持续优化中。 作者极具共享精神，把很多模型、还有重要数据开源， 但文档写得有些不完整， 缺包、缺版本。 
 
-经尝试， 目前可成功运行 sft-baichuan 模型。 可按以下步骤操作：
-
-## 0. 下载模型的通用配置
-
-直接使用镜像网站 https://hf-mirror.com/ 所提方法二：huggingface-cli
-
+经尝试， 目前可成功运行 sft-13b-baichuan 模型。 可按以下步骤操作：
 
 ## 1. 环境配置
 
@@ -33,9 +27,6 @@ TryEduchat-baichuan.ipynb 文件
 
 ### 模型下载 
 
-#### 百川
-
-https://huggingface.co/ecnu-icalk/educhat-sft-002-13b-baichuan
 
 ```
 huggingface-cli download --resume-download ecnu-icalk/educhat-sft-002-13b-baichuan  --local-dir /path/to/educhat-sft-002-13b-baichuan
@@ -53,7 +44,6 @@ huggingface-cli download --resume-download ecnu-icalk/educhat-sft-002-13b-baichu
 ### 百川
 
 见 TryEduchat-baichuan.ipynb —— 暂不提供 Google Colab 链接， 因为模型参数文件大半在百度。
-如果运行 qwen1.8B 成功，我再更新。
 
 没有 half()  24G 显存爆掉， 但百川官方 https://huggingface.co/baichuan-inc/Baichuan-7B 所给代码 好像没有爆显存。
 
@@ -85,29 +75,3 @@ python educhat_gradio.py --top_k 50 \
 ![educhat-demo](https://github.com/sndnyang/LearnIsFun/raw/master/images/educhat_demo.png)
 
 评价： 挺死板的。
-
-# TODO
-
-- 跑通 qwen 1.8b 模型
-
-- 转chat, 也就是像说话一样慢慢出字， 而不是全部完成后再显示
-
-- 学习训练LLM， 使用所提供数据集进行训练
-
-- 量化（学习）
-
-- 接入 ollama
-
-- 想想怎么评估
-
-
-# 更新记录
-- 20240601   
-   **成功运行 educhat-sft-002-13b-baichuan**  
-   **成功运行 gradio demo**
-   花费 一天百度超级会员 2.65， 拼多多 晓黑板官方旗舰店， 下载 5个9G多文件
-   qwen版 仍未通
-- 202405  
-   不成功的运行  
-   尤其是 LLama版， 原始权重、解密初次听说， 暂无从下手， 输出代码——issue区 有人解码后也是乱码。
-   
