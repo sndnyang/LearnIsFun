@@ -64,7 +64,3 @@ python educhat_gradio.py --top_k 50 \
 --model_path /path/to/educhat_model 
 ```
 
-注：  
-1. 我这边会提示 frpc，这玩意儿是内网穿透（没有公网IP时让外网访问），  我不知道 gradio 居然有这个。
-
-
