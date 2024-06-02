@@ -15,7 +15,15 @@
 
 百川使用 `transformers==4.33.1 tokenizers==0.13.3`,  通义千问使用当前最新的`tokenizers-0.19.1 transformers-4.41.2`
 
-百川使用 4.41.x 会报错， 通义千问使用 4.37以下会报错， 我不确定 4.37/4.38 是否通用——没测。
+百川使用 4.41.x 会报错， 通义千问使用 4.37以下会报错， 试了下 4.37.1 也会报错 'BaichuanTokenizer' object has no attribute 'sp_model'
+
+**更新** https://github.com/baichuan-inc/Baichuan2/issues/204#issuecomment-1756867868
+
+```
+修改下 tokenization_baichuan.py 也可以，把 super() 修改到最后执行
+ 也就是 huggingface-cli 下载到的那个文件夹里有个 tokenization_baichuan.py。
+```
+
 
 
 ## 百川 baichuan 模型 13B
@@ -53,6 +61,9 @@
 
 
 # 更新记录
+- 20240602    
+   **解决 百川和千问两个模型transformers版本要求不一致问题**
+   **解决 educhat_gradio 对 千问模型的支持问题——就是把那一堆special tokens删了就行了**
 - 20240601   
    **成功运行 educhat-sft-002-13b-baichuan**    
    **成功运行 gradio demo**   
