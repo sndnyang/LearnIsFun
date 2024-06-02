@@ -131,32 +131,33 @@ model.gradient_checkpointing_enable()  # reduce number of stored activations
 print('Loading tokenizer...')
 tokenizer = transformers.AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
 
-tokenizer.add_special_tokens(
-    {
-        "pad_token": "</s>",
-        "eos_token": "</s>",
-        "sep_token": "<s>",
-    }
-)
-additional_special_tokens = (
-    []
-    if "additional_special_tokens" not in tokenizer.special_tokens_map
-    else tokenizer.special_tokens_map["additional_special_tokens"]
-)
-additional_special_tokens = list(
-    set(additional_special_tokens + list(QA_SPECIAL_TOKENS.values())))
+# Special tokens 经测试， 对  qwen 1.8B 全部多余， 返回全是特殊字符
+# tokenizer.add_special_tokens(
+#     {
+#         "pad_token": "</s>",
+#         "eos_token": "</s>",
+#         "sep_token": "<s>",
+#     }
+# )
+# additional_special_tokens = (
+#     []
+#     if "additional_special_tokens" not in tokenizer.special_tokens_map
+#     else tokenizer.special_tokens_map["additional_special_tokens"]
+# )
+# additional_special_tokens = list(
+#     set(additional_special_tokens + list(QA_SPECIAL_TOKENS.values())))
 
-print("additional_special_tokens:", additional_special_tokens)
+# print("additional_special_tokens:", additional_special_tokens)
 
-tokenizer.add_special_tokens(
-    {"additional_special_tokens": additional_special_tokens})
+# tokenizer.add_special_tokens(
+#     {"additional_special_tokens": additional_special_tokens})
 
-if args.per_digit_tokens:
-    tokenizer._tokenizer.pre_processor = pre_tokenizers.Digits(True)
+# if args.per_digit_tokens:
+#     tokenizer._tokenizer.pre_processor = pre_tokenizers.Digits(True)
 
-human_token_id = tokenizer.additional_special_tokens_ids[
-    tokenizer.additional_special_tokens.index(QA_SPECIAL_TOKENS["Question"])
-]
+# human_token_id = tokenizer.additional_special_tokens_ids[
+#     tokenizer.additional_special_tokens.index(QA_SPECIAL_TOKENS["Question"])
+# ]
 
 print('Type "quit" to exit')
 print("Press Control + C to restart conversation (spam to exit)")
@@ -305,4 +306,6 @@ with gr.Blocks() as demo:
 
     emptyBtn.click(reset_state, outputs=[chatbot, history], show_progress=True)
 
+
+# 我将IP设置0.0.0.0 是我有相应的用处， 不设置， 默认是 localhost 也就是 127.0.0.1
 demo.queue().launch(inbrowser=True, share=True, server_name="0.0.0.0")

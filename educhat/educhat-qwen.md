@@ -55,7 +55,7 @@ huggingface-cli download --resume-download  ecnu-icalk/educhat-sft-002-1.8b-qwen
 pip install mdtex2html==1.3.0 gradio==4.32.1
 ```
 
-代码见 educhat_gradio.py， 大概有三处小改动。
+代码见 educhat_gradio.py
 
 ```
 python educhat_gradio.py --top_k 50 \
